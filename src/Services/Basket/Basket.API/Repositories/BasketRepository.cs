@@ -1,4 +1,5 @@
-﻿using Basket.API.Entities;
+﻿using System.Text;
+using Basket.API.Entities;
 using Basket.API.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using System;
@@ -32,15 +33,25 @@ namespace Basket.API.Repositories
         
         public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
         {
-            //await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket));
-            await _redisCache.SetStringAsync(basket.UserName, JsonSerializer.Serialize(basket));
-            
+            //await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket)); //NewtonSoft
+            await _redisCache.SetStringAsync(basket.UserName, JsonSerializer.Serialize(basket));            
             return await GetBasket(basket.UserName);
         }
 
         public async Task DeleteBasket(string userName)
         {
             await _redisCache.RemoveAsync(userName);
+        }
+
+        public int MetodoComNomeGrande(string a, string b, string c){
+
+            var j = 15;
+
+            StringBuilder stringBuilder = new();
+            
+
+
+            return j;
         }
     }
 }
