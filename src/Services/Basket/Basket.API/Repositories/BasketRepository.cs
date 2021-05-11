@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Basket.API.Entities;
+﻿using Basket.API.Entities;
 using Basket.API.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using System;
@@ -41,17 +40,6 @@ namespace Basket.API.Repositories
         public async Task DeleteBasket(string userName)
         {
             await _redisCache.RemoveAsync(userName);
-        }
-
-        public int MetodoComNomeGrande(string a, string b, string c){
-
-            var j = 15;
-
-            StringBuilder stringBuilder = new();
-            
-
-
-            return j;
-        }
+        }      
     }
 }

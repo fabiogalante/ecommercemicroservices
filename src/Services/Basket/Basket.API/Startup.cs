@@ -1,3 +1,5 @@
+using Basket.API.Repositories;
+using Basket.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +27,13 @@ namespace Basket.API
                 options.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
             });
 
-            services.AddControllers();
+            services.AddScoped<IBasketRepository, BasketRepository>();
+
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
